@@ -14,7 +14,7 @@ if(WITH_GRAPHICS_CONTEXT)
         include_directories(${SFML_INCLUDE_DIR})
         target_link_libraries(pdc_evol_model ${SFML_LIBRARIES})
     endif(SFML_FOUND)
-    list(APPEND eye_evolution SOURCES src/GraphicDisplay.cpp src/GraphicDisplay.h)
+    list(APPEND pdc_evol_model SOURCES src/GraphicDisplay.cpp src/GraphicDisplay.h)
     add_definitions(-DWITH_GRAPHICS_CONTEXT=1)
 endif(WITH_GRAPHICS_CONTEXT)
 

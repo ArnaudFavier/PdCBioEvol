@@ -20,7 +20,11 @@
 
 #### How to run (Linux)
 
-`cmake CMakeLists.txt`
+Command line: `cmake CMakeLists.txt`
+
+OR
+
+Graphical interface: `cmake -DWITH_GRAPHICS_CONTEXT=1 CMakeLists.txt`
 
 `make`
 

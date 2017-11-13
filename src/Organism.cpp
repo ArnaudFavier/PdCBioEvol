@@ -2,6 +2,8 @@
 // Created by arrouan on 28/09/16.
 //
 
+#include <omp.h>
+
 #include "Organism.h"
 #include "DNA.h"
 #include "Common.h"
@@ -393,6 +395,7 @@ void Organism::compute_fitness() {
   }
 
   sum_metabolic_error = 0;
+  #pragma once parallel for
   for (int i = 0; i < Common::Metabolic_Error_Precision; i++) {
     sum_metabolic_error+=std::abs(gridcell_->environment_target[i]-metabolic_error[i]);
   }

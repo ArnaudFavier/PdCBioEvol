@@ -2,7 +2,7 @@
 // Created by arrouan on 28/09/16.
 //
 
-#include <stdint-gcc.h>
+// #include <stdint-gcc.h> // Intel Compiler (icc)
 #include <random>
 #include <zlib.h>
 #include "Common.h"

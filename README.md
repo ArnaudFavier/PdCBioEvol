@@ -17,14 +17,20 @@
 
 `sudo apt-get install cmake`
 
+If you want to use Intel Parallel Studio:
+
+`source /opt/intel/compilers_and_libraries/linux/bin/compilervars.sh intel64`
+
+`echo 'PATH=$PATH:/opt/intel/compilers_and_libraries/linux/bin/intel64/' >> ~/.bashrc`
+
 
 #### How to run (Linux)
 
-Command line: `cmake -DWITH_GRAPHICS_CONTEXT=0 CMakeLists.txt`
+Command line: `cmake -DWITH_GRAPHICS_CONTEXT=0 .`
 
-OR
+or
 
-Graphical interface: `cmake -DWITH_GRAPHICS_CONTEXT=1 CMakeLists.txt`
+Graphical interface: `cmake -DWITH_GRAPHICS_CONTEXT=1 .`
 
 `make`
 

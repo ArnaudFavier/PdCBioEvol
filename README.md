@@ -19,7 +19,7 @@
 
 If you want to use Intel Parallel Studio:
 
-`source /opt/intel/compilers_and_libraries/linux/bin/compilervars.sh intel64`
+`echo 'source /opt/intel/compilers_and_libraries/linux/bin/compilervars.sh intel64' >> ~/.bashrc`
 
 `echo 'PATH=$PATH:/opt/intel/compilers_and_libraries/linux/bin/intel64/' >> ~/.bashrc`
 

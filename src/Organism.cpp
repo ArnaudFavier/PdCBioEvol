@@ -254,10 +254,10 @@ void Organism::init_organism() {
 }
 
 void Organism::compute_protein_concentration() {
-  int rna_id;
+  int rna_id = 0;
 
-  #pragma omp parallel for
-  for (rna_id = 0; rna_id < rna_list_.size(); rna_id++) {
+  // #pragma omp parallel for
+  for (auto it = rna_list_.begin(); it != rna_list_.end(); it++) {
     float delta_pos = 0, delta_neg = 0;
     for (auto prot : rna_influence_[rna_id]) {
       if (prot.second > 0)
@@ -276,6 +276,8 @@ void Organism::compute_protein_concentration() {
                                       * (delta_pos_pow_n /
                                          (delta_pos_pow_n +
                                              Common::hill_shape)));
+
+    rna_id++;
   }
 
   std::unordered_map<float,float> delta_concentration;

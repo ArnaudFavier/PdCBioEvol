@@ -89,7 +89,9 @@ void World::init_environment() {
 }
 
 void World::run_evolution() {
+#if WITH_GRAPHICS_CONTEXT
   GraphicDisplay* display = new GraphicDisplay(this);
+#endif
   while (time_ < Common::Number_Evolution_Step) {
     evolution_step();
     int living_one = 0;
@@ -101,7 +103,10 @@ void World::run_evolution() {
       }
     }
 
+#if WITH_GRAPHICS_CONTEXT
     display->display();
+#endif
+    
     stats();
     if (time_%100 == 0) {
       printf(

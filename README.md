@@ -20,7 +20,7 @@
 
 #### How to run (Linux)
 
-Command line: `cmake CMakeLists.txt`
+Command line: `cmake -DWITH_GRAPHICS_CONTEXT=0 CMakeLists.txt`
 
 OR
 

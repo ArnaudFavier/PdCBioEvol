@@ -2,8 +2,6 @@
 // Created by arrouan on 28/09/16.
 //
 
-#include <omp.h>
-
 #include "Organism.h"
 #include "DNA.h"
 #include "Common.h"
@@ -256,7 +254,6 @@ void Organism::init_organism() {
 void Organism::compute_protein_concentration() {
   int rna_id = 0;
 
-  // #pragma omp parallel for
   for (auto it = rna_list_.begin(); it != rna_list_.end(); it++) {
     float delta_pos = 0, delta_neg = 0;
     for (auto prot : rna_influence_[rna_id]) {
@@ -398,7 +395,6 @@ void Organism::compute_fitness() {
   }
 
   sum_metabolic_error = 0;
-  #pragma omp parallel for
   for (int i = 0; i < Common::Metabolic_Error_Precision; i++) {
     sum_metabolic_error+=std::abs(gridcell_->environment_target[i]-metabolic_error[i]);
   }

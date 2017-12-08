@@ -278,8 +278,8 @@ void Organism::compute_protein_concentration() {
   }
 
   std::unordered_map<float,float> delta_concentration;
-  for (auto rna : rna_produce_protein_) {
-    for (auto prot : rna_produce_protein_[rna.first]) {
+  for (auto &rna : rna_produce_protein_) {
+    for (auto &prot : rna_produce_protein_[rna.first]) {
       if (delta_concentration.find(prot.first) == delta_concentration.end()) {
         delta_concentration[prot.first] = rna_list_[rna.first]->current_concentration_;
       } else {

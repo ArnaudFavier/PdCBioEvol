@@ -6,6 +6,7 @@
 #include "DNA.h"
 #include "Organism.h"
 #include "GraphicDisplay.h"
+#include "omp.h"
 
 
 World::World(int width, int height, uint32_t seed) {

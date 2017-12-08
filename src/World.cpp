@@ -106,7 +106,7 @@ void World::run_evolution() {
 #if WITH_GRAPHICS_CONTEXT
     display->display();
 #endif
-    
+
     stats();
     if (time_%100 == 0) {
       printf(
@@ -174,6 +174,7 @@ void World::evolution_step() {
     }
   }
 
+  #pragma omp parallel for
   for (int i = 0; i < width_; i++) {
     for (int j = 0; j < height_; j++) {
 
@@ -390,7 +391,3 @@ void World::stats() {
   best->move_success_<<","<<
   best->dupli_success_<<std::endl;
 }
-
-
-
-

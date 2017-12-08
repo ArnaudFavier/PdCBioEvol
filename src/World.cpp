@@ -129,6 +129,7 @@ void World::evolution_step() {
 
   Organism* best;
 
+  #pragma omp parallel for collapse(2)
   for (int i = 0; i < width_; i++) {
     for (int j = 0; j < height_; j++) {
       if (grid_cell_[i * width_ + j]->organism_ != nullptr) {
@@ -175,7 +176,7 @@ void World::evolution_step() {
     }
   }
 
-  #pragma omp parallel for
+  #pragma omp parallel for collapse(2)
   for (int i = 0; i < width_; i++) {
     for (int j = 0; j < height_; j++) {
 

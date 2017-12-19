@@ -6,6 +6,17 @@
 #include "DNA.h"
 #include "Common.h"
 
+#include "omp.h"
+
+inline double fastPow(double a, double b) {
+  union {
+    double d;
+    int x[2];
+  } u = { a };
+  u.x[1] = (int)(b * (u.x[1] - 1072632447) + 1072632447);
+  u.x[0] = 0;
+  return u.d;
+}
 
 void Organism::translate_RNA() {
 
@@ -252,10 +263,12 @@ void Organism::init_organism() {
 }
 
 void Organism::compute_protein_concentration() {
-  int rna_id = 0;
+  float delta_pos, delta_neg;
 
-  for (auto it = rna_list_.begin(); it != rna_list_.end(); it++) {
-    float delta_pos = 0, delta_neg = 0;
+  #pragma omp simd lastprivate(delta_pos, delta_neg)
+  for (int rna_id = 0; rna_id < rna_list_.size(); rna_id++) {
+    delta_pos = 0;
+    delta_neg = 0;
     for (auto prot : rna_influence_[rna_id]) {
       if (prot.second > 0)
         delta_pos += prot.second * protein_list_map_[prot.first]->concentration_;
@@ -263,8 +276,8 @@ void Organism::compute_protein_concentration() {
         delta_neg -= prot.second * protein_list_map_[prot.first]->concentration_;
     }
 
-    float delta_pos_pow_n = pow(delta_pos,Common::hill_shape_n);
-    float delta_neg_pow_n = pow(delta_neg,Common::hill_shape_n);
+    float delta_pos_pow_n = fastPow(delta_pos,Common::hill_shape_n);
+    float delta_neg_pow_n = fastPow(delta_neg,Common::hill_shape_n);
 
      rna_list_[rna_id]->current_concentration_ = rna_list_[rna_id]->concentration_base_
                                * (Common::hill_shape
@@ -273,8 +286,6 @@ void Organism::compute_protein_concentration() {
                                       * (delta_pos_pow_n /
                                          (delta_pos_pow_n +
                                              Common::hill_shape)));
-
-    rna_id++;
   }
 
   std::unordered_map<float,float> delta_concentration;

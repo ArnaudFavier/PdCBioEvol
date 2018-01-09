@@ -1,10 +1,15 @@
 #include <iostream>
+#include <chrono>
 #include "src/World.h"
 #include "src/Common.h"
 
 using namespace std;
 
+typedef std::chrono::high_resolution_clock Clock;
+
 int main() {
+  auto chronoStart = Clock::now();
+
   printf("Init binding matrix\n");
   Common::init_binding_matrix(897685687);
 
@@ -24,4 +29,7 @@ int main() {
     printf("Run evolution\n");
     world->run_evolution();
   }
+
+  auto chronoEnd = Clock::now();
+  std::cout << "Execution time: " << std::chrono::duration_cast<std::chrono::milliseconds>(chronoEnd - chronoStart).count() << " milliseconds for " << Common::Number_Evolution_Step << " steps" << std::endl;
 }

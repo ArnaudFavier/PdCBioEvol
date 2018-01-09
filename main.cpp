@@ -1,5 +1,6 @@
 #include <iostream>
 #include <chrono>
+#include <omp.h>
 #include "src/World.h"
 #include "src/Common.h"
 
@@ -7,7 +8,10 @@ using namespace std;
 
 typedef std::chrono::high_resolution_clock Clock;
 
-int main() {
+int main(int argc, char* argv[]) {
+  if (argc > 1)
+    omp_set_num_threads(atoi(argv[1]));
+
   auto chronoStart = Clock::now();
 
   printf("Init binding matrix\n");
@@ -31,5 +35,5 @@ int main() {
   }
 
   auto chronoEnd = Clock::now();
-  std::cout << "Execution time: " << std::chrono::duration_cast<std::chrono::milliseconds>(chronoEnd - chronoStart).count() << " milliseconds for " << Common::Number_Evolution_Step << " steps" << std::endl;
+  std::cout << "Execution time: " << std::chrono::duration_cast<std::chrono::duration<float>>(chronoEnd - chronoStart).count() << " seconds for " << Common::Number_Evolution_Step << " steps and " << omp_get_max_threads() << " threads" << std::endl;
 }

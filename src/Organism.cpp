@@ -265,7 +265,7 @@ void Organism::init_organism() {
 void Organism::compute_protein_concentration() {
   float delta_pos, delta_neg;
 
-  #pragma omp simd lastprivate(delta_pos, delta_neg)
+  //#pragma omp simd lastprivate(delta_pos, delta_neg)
   for (int rna_id = 0; rna_id < rna_list_.size(); rna_id++) {
     delta_pos = 0;
     delta_neg = 0;

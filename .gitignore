@@ -3,6 +3,6 @@ CMakeCache.txt
 cmake_install.cmake
 Makefile
 *.o
-pdc_evol_model
+pdc_evol_model*
 stats_*.txt
 pin.log

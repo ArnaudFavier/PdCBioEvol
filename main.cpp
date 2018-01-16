@@ -35,5 +35,5 @@ int main(int argc, char* argv[]) {
   }
 
   auto chronoEnd = Clock::now();
-  std::cout << "Execution time: " << std::chrono::duration_cast<std::chrono::duration<float>>(chronoEnd - chronoStart).count() << " seconds for " << Common::Number_Evolution_Step << " steps and " << omp_get_max_threads() << " threads" << std::endl;
+  std::clog << "Execution time: " << std::chrono::duration_cast<std::chrono::duration<float>>(chronoEnd - chronoStart).count() << " seconds for " << Common::Number_Evolution_Step << " steps and " << omp_get_max_threads() << " threads" << std::endl;
 }
